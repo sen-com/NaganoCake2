@@ -1,0 +1,55 @@
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-8">
+      <div class="row mb-3">
+        <div class="col-2">登録情報</div>
+        <div class="col-2">
+          <%= link_to "編集する", edit_end_users_path, class: "btn btn-info" %>
+        </div>
+        <div class="col-3">
+          <a href="#" class="btn btn-info">パスワードを変更する</a>
+        </div>
+      </div>
+      <table class="table table-bordered">
+        <tbody>
+            <tr>
+              <th scope="row">氏名</th>
+              <td><%= @end_user.first_name %> <%= @end_user.last_name %></td>
+            </tr>
+            <tr>
+              <th scope="row">カナ</th>
+              <td><%= @end_user.kana_first_name %> <%= @end_user.kana_last_name %></td>
+            </tr>
+            <tr>
+              <th scope="row">郵便番号</th>
+              <td><%= @end_user.address %></td>
+            </tr>
+            <tr>
+              <th scope="row">住所</th>
+              <td><%= @end_user.postal_code %></td>
+            </tr>
+            <tr>
+              <th scope="row">電話番号</th>
+              <td><%= @end_user.phone_number %></td>
+            </tr>
+            <tr>
+              <th scope="row">メールアドレス</th>
+              <td><%= @end_user.email %></td>
+            </tr>
+        </tbody>
+      </table>
+      <div class="row mt-4">
+        <div class="col-2">配送先</div>
+        <div class="col-3">
+          <%= link_to "一覧を見る", addresses_path, class: "btn btn-info" %>
+        </div>
+    　</div>
+      <div class="row mt-3">
+        <div class="col-2">注文履歴</div>
+        <div class="col-3">
+          <%= link_to "一覧を見る", orders_path, class: "btn btn-info" %>
+        </div>
+    　</div>　
+    </div>
+  </div>
+</div>

@@ -1,0 +1,83 @@
+<div class="container">
+  <div class="m-5">
+    <strong>注文詳細</strong>
+  </div>
+  <div class="row">
+      <div class="col-7">
+        <strong>注文情報</strong>
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+                <td class="table-secondary">注文日</td>
+                <td><%= @order.created_at.strftime('%Y/%m/%d') %></td>
+            </tr>
+            <tr>
+                <td class="table-secondary">配送先</td>
+                <td>
+                    <%= @order.post_number %><br>
+                    <%= @order.address %><br>
+                    <%= @order.name %>
+                </td>
+            </tr>
+            <tr>
+                <td class="table-secondary">支払方法</td>
+                <td><%= @order.method_payment_i18n %></td>
+            </tr>
+            <tr>
+                <td class="table-secondary">ステータス</td>
+                <td><%= @order.order_status_i18n %><br></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-3">
+        <strong>請求情報</strong>
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+                <td class="table-secondary">商品合計</td>
+                <td>
+                  <% item_prices = 0 %>
+                  <% @order.order_details.each do |order_detail| %>
+                    <% item_prices = order_detail.tax_included_price * order_detail.quantitty %>
+                  <% end %>
+                  <%= item_prices %>
+                </td>
+            </tr>
+            <tr>
+                <td class="table-secondary">配送料</td>
+                <td><%= @order.postage %></td>
+            </tr>
+            <tr>
+                <td class="table-secondary">ご請求額</td>
+                <td><%= @order.totsl_payment %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-9">
+        <strong>注文内容</strong>
+        <table class="table table-bordered">
+            <thead class="thead-light">
+            <tr>
+                <th>商品</th>
+                <th>単価（税込）</th>
+                <th>個数</th>
+                <th>小計</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @order.order_details.each do |order_detail| %>
+                <tr>
+                <td><%= order_detail.item.name %></td>
+                <td><%= order_detail.tax_included_price %></td>
+                <td><%= order_detail.quantitty %></td>
+                <td><%= order_detail.tax_included_price * order_detail.quantitty %></td>
+                </tr>
+            <% end %>
+            </tbody>
+        </table>
+      </div>
+  </div>
+</div>
+

@@ -1,0 +1,120 @@
+<div class="container">
+<div class="mt-4 mb-5 small">
+  <div class="m-5">
+    <h2>新規会員登録</h2>
+  </div>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+    <div class="row form-group">
+      <div class="col-1"></div>
+      <div class="col-2">
+        <p>名前</p>
+      </div>
+      <div class="col-1 text-right">
+        <p class="">(姓)　</p>
+      </div>
+      <div class="col-2 pl-0">
+        <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name", class: 'form-control' %>
+      </div>
+      <div class="col-1 text-right">
+        <p class="">(名)　</p>
+      </div>
+      <div class="field col-2 pl-0">
+        <%= f.text_field :last_name, autocomplete: "last_name", class: 'form-control' %>
+      </div>
+    </div>
+
+    <div class="row form-group align-bottom">
+      <div class="col-1"></div>
+      <div class="col-2">
+        <p>フリガナ</p>
+      </div>
+      <div class="col-1 text-right">
+        <p class="">(セイ)</p>
+      </div>
+      <div class="col-2 pl-0">
+        <%= f.text_field :kana_first_name, autocomplete: "kana_first_name", class: 'form-control' %>
+      </div>
+      <div class="col-1 text-right">
+        <p class="">(メイ)</p>
+      </div>
+      <div class="field col-2 pl-0">
+        <%= f.text_field :kana_last_name, autocomplete: "kana_last_name", class: 'form-control' %>
+      </div>
+    </div>
+
+    <div class="row form-group">
+      <div class="col-1"></div>
+      <div class="col-3">
+        <p>メールアドレス</p>
+      </div>
+      <div class="field col-4 pl-0">
+        <%= f.email_field :email, autocomplete: "email", class: 'form-control' %>
+      </div>
+    </div>
+
+    <div class="row form-group">
+      <div class="col-1"></div>
+      <div class="col-3">
+        <p>郵便番号(ハイフンなし)</p>
+      </div>
+      <div class="field col-4 pl-0">
+        <%= f.text_field :postal_code, autocomplete: "address", class: 'form-control' %>
+      </div>
+    </div>
+
+    <div class="row form-group">
+      <div class="col-1"></div>
+      <div class="col-3">
+        <p>住所</p>
+      </div>
+      <div class="field col-4 pl-0">
+        <%= f.text_field :address, autocomplete: "postal_code", class: 'form-control' %>
+      </div>
+    </div>
+
+    <div class="row form-group">
+      <div class="col-1"></div>
+      <div class="col-3">
+        <p>電話番号(ハイフンなし)</p>
+      </div>
+      <div class="field col-4 pl-0">
+        <%= f.text_field :phone_number, autocomplete: "phone_number", class: 'form-control' %>
+      </div>
+    </div>
+  
+    <div class="row form-group">
+      <div class="col-1"></div>
+      <div class="col-3">
+        <p>パスワード(6文字以上)</p>
+      </div>
+      <div class="field col-4 pl-0">
+        <%= f.password_field :password, autocomplete: "new-password", class: 'form-control' %>
+      </div>
+    </div>
+
+    <div class="row form-group">
+      <div class="col-1"></div>
+      <div class="col-3">
+        <p>パスワード(確認用)</p>
+      </div>
+      <div class="field col-4 pl-0">
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control' %>
+      </div>
+    </div>
+
+    <div class="text-center mt-3">
+      <%= f.submit "会員登録", class: "btn btn-success px-5" %>
+    </div>
+  <% end %>
+  <div class="row ">
+    <div class="col-1"></div>
+    <div class="col">
+      <p>既に登録済みの方</p>
+      <div class="ml-2">
+        <%= render "devise/shared/links" %>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

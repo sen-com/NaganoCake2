@@ -1,0 +1,87 @@
+<div class="container">
+    <%= form_with(model: @order, local: true, url: {action: 'check'}) do |f| %>
+        <% if @order.errors.any? %>
+            <div id="error_explanation">
+                <h2><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h2>
+
+                <ul>
+                    <% @order.errors.full_messages.each do |message| %>
+                        <li><%= message %></li>
+                    <% end %>
+                </ul>
+            </div>
+        <% end %>
+        <div class="my-3">
+          <strong>お支払方法</strong>
+        </div>
+        <div class="container">
+            <div>
+                <%= f.radio_button :method_payment,:credit_card %>
+                クレジットカード
+            </div>
+            <div>
+                <%= f.radio_button :method_payment, :bank_transfer %>
+                銀行振込
+            </div>
+        </div>
+        <div class="my-3">
+          <strong>お届け先</strong>
+        </div>
+        <div class="container">
+            <div class="row mb-2">
+              <div class="col-12">
+                <%= f.radio_button :address_option,0%>
+                ご自身の住所
+              </div>
+              <div class="col-1"></div>
+              <div class="col-10">
+                <%= current_end_user.postal_code %> <%= current_end_user.address %> <%= current_end_user.first_name + current_end_user.last_name %>
+              </div>
+            </div>
+            <div class="row mb-2">
+              <div class="col-12">
+                <%= f.radio_button :address_option,1 %>
+                登録済み住所から選択
+              </div>
+              <div class="col-1"></div>
+              <div class="col-11">
+                 <%= f.collection_select :address_id, @addresses, :id, :view_postnumber_address_name , class: "form-control"%>
+              </div>
+            </div>
+            <div class="row mb-2">
+              <div class="col-12">
+                <%= f.radio_button :address_option,2%>
+                新規住所
+              </div>
+              <div class="col-1"></div>
+              <div class="col-1 mr-0 pr-0">
+                <%= f.label "郵便番号" %>
+              </div>
+              <div class="col-5">
+                <%= f.text_field :post_number, class: "form-control" %>
+              </div>
+            </div>
+            <div class="row mb-2">
+              <div class="col-1"></div>
+              <div class="col-1">
+                <%= f.label "住所" %>
+              </div>
+              <div class="col-5">
+                <%= f.text_field :address, class: "form-control" %>
+              </div>
+            </div>
+            <div class="row mb-2">
+              <div class="col-1"></div>
+              <div class="col-1">
+                <%= f.label "氏名" %>
+              </div>
+              <div class="col-5">
+                <%= f.text_field :name, class: "form-control" %>
+              </div>    
+            </div>
+        </div>
+        <div class="text-center">
+            <%= f.submit "確認画面へ進む", class: "btn btn-info btn-lg"%>
+        </div>
+    <% end %>
+</div>

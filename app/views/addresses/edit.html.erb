@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="m-5">
+    <strong>配送先編集</strong>
+  </div>
+  <%= form_with(model: @address, local: true, class: "form-group") do |f| %>
+    <div class="row pb-1">
+      <div class="col-3">
+        <%= f.label "郵便番号（ハイフンなし）" %>
+      </div>
+      <div class="col-2">
+        <%= f.text_field :postal_number, class: 'form-control' %>
+      </div>
+    </div>
+    <div class="row pb-1">
+      <div class="col-3">
+        <%= f.label "住所" %>
+      </div>
+      <div class="col-4">
+        <%= f.text_field :address, class: 'form-control' %>
+      </div>
+    </div>
+    <div class="row pb-1">
+      <div class="col-3">
+        <%= f.label "名前" %>
+      </div>
+      <div class="col-2">
+        <%= f.text_field :name, class: 'form-control'%>
+      </div>
+      <div class="col-2"></div>
+      <div class="col-1">
+        <%= f.submit "編集する", class: "btn btn-info"%>
+      </div>
+    </div>
+  <% end %>
+</div>
