@@ -1,3 +1,31 @@
 <div>
     ようこそ、NaganoCakeへ！<br>このサイトは、ケーキ販売のECサイトになります。<br>会員でない方も商品の閲覧はできますが、<br>購入には会員登録が必要になります。
 </div>
+
+<div id="wrapper">
+	<ul id="sort">
+		<li id="KeyYellow">Yellow</li>
+		<li id="KeyRed">Red</li>
+		<li id="KeyBlue">Blue</li>
+		<li id="KeyAll">All</li>
+	</ul>
+	<div id="container">
+		<div class="yellow all">sample</div>
+		<div class="blue all">sample</div>
+		<div class="red all">sample</div>
+	</div>
+</div>
+
+<script>
+$(function(){
+	$('#sort li').each(function(){
+		$(this).click(function(){
+			var idname = $(this).attr("id").substring(3).toLowerCase();
+			var classname = '.';
+			classname += idname;
+			$('#container div:not(classname)').css('display','none');
+			$(classname).fadeIn(200);
+		});
+	});
+});
+</script>
