@@ -5,7 +5,8 @@ class ItemsController < ApplicationController
   end
 
   def index
-    @ranking_items = Item.where(id: OrderDetail.group(:item_id).order('count(item_id) desc').limit(3).pluck(:item_id))
+    @ranking_items = Item.find(OrderDetail.group(:item_id).order('sum(quantitty) desc').limit(3).pluck(:item_id))
+    binding.pry
     @items = Item.where(is_working: "true").search(params[:search])
   end
 

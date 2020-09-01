@@ -13,46 +13,69 @@
     </div>
   </div>
   <div class="row mx-5">
-    <div class="col-2">
-      <div class="my-4">
-        <strong class="">人気商品ランキング</strong>
-      </div>
-      <div class="row">
-        <% @ranking_items.each do |ranking_item| %>
-          <div class="col-12 mb-2">
-            <%= link_to item_path(ranking_item) do %>
-            <div class="card mx-2">
-                <%= attachment_image_tag ranking_item, :image, size: '100x150' , format: 'jpeg', class: "card-img-top", fallback: "no_image.png",　size:'100x100' %>
-                <div class="card-body">
-                <h5 class="card-title"><%= ranking_item.name %></h5>
-                <p class="card-text">¥<%= ranking_item.price_excluding_tax %></p>
-                </div>
-            </div>
-            <% end %>
-          </div>
-        <% end %>
-      </div>
-    </div>
-    <div class="col-1"></div>
+    <div class="col-3"></div>
     <div class="col-6">
-      <div class="my-4">
-        <strong class="">商品一覧（全<%= @items.count %>件）</strong>
+      <div class="menu-btn">
+        <a href="#all_items"><button class="btn btn-success">商品一覧</button></a>
+        <a href="#ranking"><button class="btn btn-success">人気ランキング</button></a>
       </div>
-      <div class="row">
-        <% @items.each do |item| %>
-          <div class="col-4 mb-2">
-            <%= link_to item_path(item) do %>
-            <div class="card">
-                <%= attachment_image_tag item, :image, size: '200x150' , format: 'jpeg', class: "card-img-top", fallback: "no_image.png",　size:'100x100' %>
-                <div class="card-body">
-                <h5 class="card-title"><%= item.name %></h5>
-                <p class="card-text">¥<%= item.price_excluding_tax %></p>
+      <div class="menus">
+        <div id="ranking">
+          <div class="my-4">
+            <strong class="">人気商品ランキング</strong>
+          </div>
+          <div class="row">
+            <% @ranking_items.each.with_index(1) do |ranking_item, i| %>
+              <div class="col-4 mb-2">
+                <%= link_to item_path(ranking_item) do %>
+                <div class="card mx-2">
+                    <%= attachment_image_tag ranking_item, :image, size: '200x150' , format: 'jpeg', class: "card-img-top", fallback: "no_image.png", size:'200x150' %>
+                    <div class="card-body">
+                    <h5 class="card-title"><%= ranking_item.name %></h5>
+                    <p class="card-text">¥<%= ranking_item.price_excluding_tax %></p>
+                    </div>
                 </div>
-            </div>
+                <% end %>
+              </div>
             <% end %>
           </div>
-        <% end %>
+        </div>
+        <div id="all_items">
+          <div class="my-4">
+            <strong class="">商品一覧（全<%= @items.count %>件）</strong>
+          </div>
+          <div class="row">
+            <% @items.each do |item| %>
+              <div class="col-4 mb-2">
+                <%= link_to item_path(item) do %>
+                <div class="card">
+                    <%= attachment_image_tag item, :image, size: '200x150' , format: 'jpeg', class: "card-img-top", fallback: "no_image.png", size:'200x150' %>
+                    <div class="card-body">
+                    <h5 class="card-title"><%= item.name %></h5>
+                    <p class="card-text">¥<%= item.price_excluding_tax %></p>
+                    </div>
+                </div>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
  </div>
 </div>
+
+<script>
+  jQuery(function($){
+    $('.menus > div').hide();
+
+    $('.menu-btn a').click(function () {
+        $('.menus > div').hide().filter(this.hash).fadeIn();
+
+        $('.menu-btn a').removeClass('active');
+        $(this).addClass('active');
+
+        return false;
+    }).filter(':eq(0)').click();
+  })
+</script>
