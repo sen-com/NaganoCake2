@@ -1,20 +1,61 @@
-<div class="container">
-  <div class="row mt-5">
-    <div class="col-2"></div>
-    <div class="col-4">
-      <%= attachment_image_tag @item, :image, size: '200x200' , format: 'jpeg', class: "card-img-top", fallback: "no_image.png" %>
-    </div>
-    <div class="col-5">
-      <h2><%= @item.name %></h2>
-      <p><%= @item.description %></p>
-      <div class="strong">
-        ¥<%= @item.price_excluding_tax %>（税込み）
+<%= stylesheet_link_tag "items", :media => "all" %>
+<div class="container pt-5">
+  <div class="card mx-auto mt-5" style="max-width: 700px;">
+      <div class="row no-gutters">
+        <div class="col-lg-6">
+          <%= attachment_image_tag @item, :image, size: '200x200' , format: 'jpeg', class: "card-img-top", fallback: "no_image.jpeg" %>
+        </div>
+        <div class="col-lg-6">
+          <div class="card-body">
+            <h4 class="card-title"><%= @item.name %></h4>
+            <p class="card-text"><%= @item.description %></p>
+            <p class="card-text"> ¥<%= @item.price_excluding_tax %>（税込み）</p>
+            <button id="select-btn" class="btn btn-success">数量を選択してカートに追加</button>
+
+          </div>
+        </div>
       </div>
-      <%= form_for @cart_item, url:cart_items_path do |f| %>
-        <%= f.select :amount, [1,2,3,4,5,6,7,8,9] %>
-        <%= f.hidden_field :item_id, :value => @item.id %>
-        <%= f.submit "カートに入れる", class: "btn btn-info" %>
-      <% end %>
     </div>
-  </div>
 </div>
+
+<div id="input" title="数量選択">
+  <%= form_for @cart_item, url:cart_items_path do |f| %>
+    <table>
+      <tr>
+        <th>価格</th>
+        <td>¥<%= @item.price_excluding_tax %>（税込み）</td>
+      </tr>
+      <tr>
+        <th>数量</th>
+        <td class="form-group"><%= f.select :amount, [1,2,3,4,5,6,7,8,9], class: "form-control" %></td>
+      </tr>
+    </table>
+    <%= f.hidden_field :item_id, :value => @item.id %>
+  <% end %>
+</div>
+
+
+<script>
+$(function() {
+  // 入力ダイアログを表示
+  $("#select-btn").click(function() {
+    $("#input").dialog("open");
+    return false;
+  });
+
+  // 入力ダイアログを定義
+  $("#input").dialog({
+    autoOpen: false,
+    modal: true,
+    width: 'auto',
+    buttons: {
+      "カートに追加": function() {
+        $('form').submit();
+        $(this).dialog("close");
+      },
+      "キャンセル": function() {
+      }
+    }
+  });
+});
+</script>

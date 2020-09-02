@@ -7,6 +7,9 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script type="text/javascript" src="js/mdb.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/pepper-grinder/jquery-ui.css">
   </head>
 
   <nav class="navbar navbar-expand-md  navbar-light bg-info">
@@ -14,11 +17,11 @@
     <a class="navbar-brand text-light" href="/admin/top">NagoyaCake</a>
   <% else %>
     <a class="navbar-brand text-light" href="/">NagoyaCake</a>
-  <% end %>  
+  <% end %>
     <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#bs-navi" aria-controls="bs-navi" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
- 
+
     <div class="collapse navbar-collapse justify-content-end" id="bs-navi">
       <% if end_user_signed_in? %>
         <ul class="navbar-nav">
@@ -76,11 +79,11 @@
         </div>
         </div>
             <div class="col-3">
-              <%= form_tag(admin_items_path, :method => "get") do %>  
-                <div class="input-group input-group-sm">  
-                  <%= text_field_tag :search, params[:search], class:" form-control" %>  
-                  <%= submit_tag "検索", :name => nil , class: "input-group-btn btn btn-sm"%>  
-                </div>  
+              <%= form_tag(admin_items_path, :method => "get") do %>
+                <div class="input-group input-group-sm">
+                  <%= text_field_tag :search, params[:search], class:" form-control" %>
+                  <%= submit_tag "検索", :name => nil , class: "input-group-btn btn btn-sm"%>
+                </div>
               <% end %>
             </div>
       <% else %>
